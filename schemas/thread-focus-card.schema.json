@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/thread-focus-card.schema.json",
+  "title": "ThreadFocusCard",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "thread_id",
+    "title",
+    "focus_type",
+    "focus_name",
+    "status_key",
+    "status_label",
+    "current_action",
+    "next_step",
+    "confirmed_facts",
+    "blocker",
+    "latest_visible_output",
+    "source_apis"
+  ],
+  "properties": {
+    "thread_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "focus_type": {
+      "type": "string",
+      "enum": [
+        "函数",
+        "方法",
+        "类",
+        "路由",
+        "配置键",
+        "SQL",
+        "模块",
+        "流程"
+      ]
+    },
+    "focus_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "focus_file": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status_key": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "reading_requirements",
+        "locating_entry",
+        "reading_interface",
+        "reading_object",
+        "stitching_flow",
+        "editing_interface",
+        "editing_object",
+        "filling_state",
+        "running_verification",
+        "waiting_tool_result",
+        "waiting_user_decision",
+        "done",
+        "paused"
+      ]
+    },
+    "status_label": {
+      "type": "string",
+      "enum": [
+        "待开始",
+        "在看需求",
+        "在定位入口",
+        "在看接口",
+        "在看对象",
+        "在串流程",
+        "在改接口",
+        "在改对象",
+        "在补状态",
+        "在跑验证",
+        "等待工具结果",
+        "等待你决定",
+        "已完成",
+        "已搁置"
+      ]
+    },
+    "current_action": {
+      "type": "string",
+      "minLength": 1
+    },
+    "next_step": {
+      "type": "string",
+      "minLength": 1
+    },
+    "confirmed_facts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "blocker": {
+      "type": "string",
+      "minLength": 1
+    },
+    "latest_visible_output": {
+      "type": "string"
+    },
+    "source_apis": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    }
+  }
+}
+

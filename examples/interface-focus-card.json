@@ -1,0 +1,22 @@
+{
+  "thread_id": "thr_demo_interface",
+  "title": "补 GET /api/thread-briefs 的显式输出过滤",
+  "focus_type": "路由",
+  "focus_name": "GET /api/thread-briefs",
+  "focus_file": "server/routes/threadBriefs.ts",
+  "status_key": "editing_interface",
+  "status_label": "在改接口",
+  "current_action": "在把 reasoning 和命令全文从输入中过滤掉",
+  "next_step": "补只读取 userMessage、agentMessage、plan 的测试用例",
+  "confirmed_facts": [
+    "thread/read 可以返回 turns.items",
+    "reasoning 和 agentMessage 是分离的"
+  ],
+  "blocker": "无",
+  "latest_visible_output": "准备把卡片输入限制为显式输出，避免黑话漂移。",
+  "source_apis": [
+    "thread/list",
+    "thread/read"
+  ]
+}
+

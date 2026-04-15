@@ -1,0 +1,14 @@
+{
+  "name": "codex-thread-focus-cards",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Structured focus cards for recovering working context across Codex threads.",
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
+

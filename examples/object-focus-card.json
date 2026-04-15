@@ -1,0 +1,21 @@
+{
+  "thread_id": "thr_demo_object",
+  "title": "收敛 ThreadCardWriter.build 的卡片输出",
+  "focus_type": "方法",
+  "focus_name": "ThreadCardWriter.build",
+  "focus_file": "src/domain/card-writer.ts",
+  "status_key": "editing_object",
+  "status_label": "在改对象",
+  "current_action": "在把自由摘要改成固定字段输出",
+  "next_step": "补 title 生成规则，强制标题带代码焦点",
+  "confirmed_facts": [
+    "协议接口名只能出现在 source_apis",
+    "卡片主标题必须锚定具体代码符号"
+  ],
+  "blocker": "无",
+  "latest_visible_output": "默认焦点不能再退化成 thread/read 这种协议接口。",
+  "source_apis": [
+    "thread/read"
+  ]
+}
+
