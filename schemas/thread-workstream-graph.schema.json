@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/thread-workstream-graph.schema.json",
+  "title": "ThreadWorkstreamGraph",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "workstream_id",
+    "goal",
+    "anchor_focus_name",
+    "root_thread_id",
+    "nodes",
+    "links",
+    "frontier"
+  ],
+  "properties": {
+    "workstream_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "goal": {
+      "type": "string",
+      "minLength": 1
+    },
+    "anchor_focus_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "root_thread_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "thread_id",
+          "title",
+          "focus_name",
+          "focus_type",
+          "status_key",
+          "status_label",
+          "workspace_path",
+          "context_refs"
+        ],
+        "properties": {
+          "thread_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "focus_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "focus_type": {
+            "type": "string",
+            "enum": [
+              "函数",
+              "方法",
+              "类",
+              "路由",
+              "配置键",
+              "SQL",
+              "模块",
+              "流程"
+            ]
+          },
+          "status_key": {
+            "type": "string",
+            "enum": [
+              "not_started",
+              "reading_requirements",
+              "locating_entry",
+              "reading_interface",
+              "reading_object",
+              "stitching_flow",
+              "editing_interface",
+              "editing_object",
+              "filling_state",
+              "running_verification",
+              "waiting_tool_result",
+              "waiting_user_decision",
+              "done",
+              "paused"
+            ]
+          },
+          "status_label": {
+            "type": "string",
+            "enum": [
+              "待开始",
+              "在看需求",
+              "在定位入口",
+              "在看接口",
+              "在看对象",
+              "在串流程",
+              "在改接口",
+              "在改对象",
+              "在补状态",
+              "在跑验证",
+              "等待工具结果",
+              "等待你决定",
+              "已完成",
+              "已搁置"
+            ]
+          },
+          "workspace_path": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "context_refs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "label",
+                "path"
+              ],
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "workspace",
+                    "skill",
+                    "repo"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "path": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "from_thread_id",
+          "to_thread_id",
+          "type",
+          "label",
+          "reason",
+          "confidence"
+        ],
+        "properties": {
+          "from_thread_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "to_thread_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "same_goal",
+              "next_step",
+              "experiment_branch",
+              "verification_branch",
+              "skill_source",
+              "workspace_handoff",
+              "blocked_by",
+              "duplicate_of",
+              "superseded_by"
+            ]
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    },
+    "frontier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "active_thread_ids",
+        "blocked_thread_ids",
+        "parked_thread_ids",
+        "next_suggested_thread_id"
+      ],
+      "properties": {
+        "active_thread_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "blocked_thread_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "parked_thread_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "next_suggested_thread_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}
