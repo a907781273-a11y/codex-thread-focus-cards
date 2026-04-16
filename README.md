@@ -80,3 +80,56 @@
 - `推荐先切回哪条线程`
 
 而不是再产出一段“正在推进闭环、持续优化体验”的废话。
+
+## 现在怎么启动
+
+当前仓库已经带了一个本地 demo，可以直接看“线程工作流图”长什么样。
+
+```bash
+cd G:\temp\codex-thread-focus-cards
+npm run demo
+```
+
+启动后打开：
+
+- `http://127.0.0.1:4173`
+
+这个 demo 现在读取的是：
+
+- `examples/demo-thread-workbench.json`
+
+也就是说，你现在看到的是一张可交互的示例工作流图，不是还没接真数据的空壳。
+
+## 现在怎么切到外部 LLM
+
+如果你要的不是 Codex 自己总结，而是别的 LLM 供应商来做总结和串联，先在启动前设置这三个环境变量：
+
+```powershell
+$env:THREAD_FOCUS_LLM_API_KEY="你的 Key"
+$env:THREAD_FOCUS_LLM_BASE_URL="https://你的供应商地址/v1"
+$env:THREAD_FOCUS_LLM_MODEL="你的模型名"
+```
+
+可选：
+
+```powershell
+$env:THREAD_FOCUS_LLM_NAME="你想显示在页面上的供应商名字"
+```
+
+然后再启动：
+
+```powershell
+cd G:\temp\codex-thread-focus-cards
+npm run demo
+```
+
+页面里会出现“用外部 LLM 重新分析”按钮。点它之后，浏览器会把：
+
+- `examples/provider-thread-source.json`
+
+这份显式线程源数据发给你配置的外部供应商。供应商返回 `cards + graph` JSON 后，页面再渲染结果。
+
+也就是说：
+
+- Codex 负责读线程和展示页面
+- 外部 LLM 负责总结和串联

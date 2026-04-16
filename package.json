@@ -5,10 +5,10 @@
   "description": "Structured focus cards for recovering working context across Codex threads.",
   "type": "module",
   "scripts": {
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "demo": "node scripts/serve-demo.mjs"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
   }
 }
-

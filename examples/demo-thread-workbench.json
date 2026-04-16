@@ -1,0 +1,213 @@
+{
+  "cards": [
+    {
+      "thread_id": "thr_skill_source",
+      "title": "收敛 SkillCardExtractor.resolveSkillSource 的技能来源识别",
+      "focus_type": "方法",
+      "focus_name": "SkillCardExtractor.resolveSkillSource",
+      "focus_file": "src/domain/skill-card-extractor.ts",
+      "status_key": "done",
+      "status_label": "已完成",
+      "current_action": "已把 skill 路径归一化成可复用的上下文引用",
+      "next_step": "切到 buildThreadWorkstreamGraph 把 skill_source 关系接上",
+      "confirmed_facts": [
+        "$pua 的技能文件路径已经固定",
+        "技能来源线程不该继续占主线工作记忆"
+      ],
+      "blocker": "无",
+      "latest_visible_output": "这个线程只负责把 skill 来源抽成 context ref，后续关系图线程会消费它。",
+      "source_apis": [
+        "thread/read"
+      ]
+    },
+    {
+      "thread_id": "thr_graph_domain",
+      "title": "补 buildThreadWorkstreamGraph 的关系类型",
+      "focus_type": "函数",
+      "focus_name": "buildThreadWorkstreamGraph",
+      "focus_file": "src/domain/thread-workstream-graph.ts",
+      "status_key": "editing_object",
+      "status_label": "在改对象",
+      "current_action": "在补主线、实验、验证、技能来源和跨目录接力这些关系边",
+      "next_step": "把工作流前沿规则接到前端列表，优先高亮推荐线程",
+      "confirmed_facts": [
+        "线程图必须先按工作流压缩，再让用户选线程",
+        "协议接口名不能作为主焦点标题"
+      ],
+      "blocker": "无",
+      "latest_visible_output": "工作流图这一层要回答线程和线程之间怎么接，而不是只说单条线程在做什么。",
+      "source_apis": [
+        "thread/list",
+        "thread/read"
+      ]
+    },
+    {
+      "thread_id": "thr_plugin_experiment",
+      "title": "试 CodexSidebarThreadMap.renderGraph 的侧边栏实验",
+      "focus_type": "方法",
+      "focus_name": "CodexSidebarThreadMap.renderGraph",
+      "focus_file": "plugin/sidebar/codex-sidebar-thread-map.ts",
+      "status_key": "reading_interface",
+      "status_label": "在看接口",
+      "current_action": "在确认侧边栏组件怎么吃工作流图数据并渲染主线与分支",
+      "next_step": "先接一个静态 graph 数据源，把 active 和 blocked 两组线程显示出来",
+      "confirmed_facts": [
+        "插件目录和原型目录是两条不同线程，需要显式串起来",
+        "侧边栏实验线程属于主线程的下一步和跨目录接力"
+      ],
+      "blocker": "无",
+      "latest_visible_output": "领域模型定完后，下一步是在插件目录把图接到侧边栏。",
+      "source_apis": [
+        "thread/read"
+      ]
+    },
+    {
+      "thread_id": "thr_repo_validation",
+      "title": "跑 GET /api/thread-workstreams 的跨目录验证",
+      "focus_type": "路由",
+      "focus_name": "GET /api/thread-workstreams",
+      "focus_file": "server/routes/thread-workstreams.ts",
+      "status_key": "running_verification",
+      "status_label": "在跑验证",
+      "current_action": "在等插件实验线程先接好渲染入口，再验证真实接口数据能不能喂进去",
+      "next_step": "等 CodexSidebarThreadMap.renderGraph 接完后，再回这条线程核对路由返回结构",
+      "confirmed_facts": [
+        "验证线程不是主线第一步，而是后置验证分支",
+        "这条线程现在被插件实验线程卡住"
+      ],
+      "blocker": "等待插件目录的渲染入口先接好",
+      "latest_visible_output": "验证线程还要等插件线程先把渲染入口接好。",
+      "source_apis": [
+        "thread/read",
+        "thread/list"
+      ]
+    }
+  ],
+  "graph": {
+    "workstream_id": "ws_thread_graph",
+    "goal": "把单线程恢复卡扩成可串联的线程工作图",
+    "anchor_focus_name": "buildThreadWorkstreamGraph",
+    "root_thread_id": "thr_skill_source",
+    "nodes": [
+      {
+        "thread_id": "thr_skill_source",
+        "title": "收敛 SkillCardExtractor.resolveSkillSource 的技能来源识别",
+        "focus_name": "SkillCardExtractor.resolveSkillSource",
+        "focus_type": "方法",
+        "status_key": "done",
+        "status_label": "已完成",
+        "workspace_path": "G:/temp/codex-thread-focus-cards",
+        "context_refs": [
+          {
+            "kind": "skill",
+            "label": "$pua",
+            "path": "C:/Users/90778/.codex/skills/pua/SKILL.md"
+          }
+        ]
+      },
+      {
+        "thread_id": "thr_graph_domain",
+        "title": "补 buildThreadWorkstreamGraph 的关系类型",
+        "focus_name": "buildThreadWorkstreamGraph",
+        "focus_type": "函数",
+        "status_key": "editing_object",
+        "status_label": "在改对象",
+        "workspace_path": "G:/temp/codex-thread-focus-cards",
+        "context_refs": [
+          {
+            "kind": "workspace",
+            "label": "thread graph prototype",
+            "path": "G:/temp/codex-thread-focus-cards"
+          }
+        ]
+      },
+      {
+        "thread_id": "thr_plugin_experiment",
+        "title": "试 CodexSidebarThreadMap.renderGraph 的侧边栏实验",
+        "focus_name": "CodexSidebarThreadMap.renderGraph",
+        "focus_type": "方法",
+        "status_key": "reading_interface",
+        "status_label": "在看接口",
+        "workspace_path": "G:/temp/codex-thread-map-plugin",
+        "context_refs": [
+          {
+            "kind": "repo",
+            "label": "plugin repo",
+            "path": "G:/temp/codex-thread-map-plugin"
+          }
+        ]
+      },
+      {
+        "thread_id": "thr_repo_validation",
+        "title": "跑 GET /api/thread-workstreams 的跨目录验证",
+        "focus_name": "GET /api/thread-workstreams",
+        "focus_type": "路由",
+        "status_key": "running_verification",
+        "status_label": "在跑验证",
+        "workspace_path": "G:/work/app-server",
+        "context_refs": [
+          {
+            "kind": "repo",
+            "label": "app server repo",
+            "path": "G:/work/app-server"
+          }
+        ]
+      }
+    ],
+    "links": [
+      {
+        "from_thread_id": "thr_skill_source",
+        "to_thread_id": "thr_graph_domain",
+        "type": "skill_source",
+        "label": "技能来源",
+        "reason": "这个线程在读 $pua 技能定义，目标线程在把状态描述规则接进工作图模型。",
+        "confidence": 0.98
+      },
+      {
+        "from_thread_id": "thr_graph_domain",
+        "to_thread_id": "thr_plugin_experiment",
+        "type": "next_step",
+        "label": "下一步",
+        "reason": "领域模型定完后，下一步是在插件目录把图接到侧边栏。",
+        "confidence": 0.95
+      },
+      {
+        "from_thread_id": "thr_graph_domain",
+        "to_thread_id": "thr_plugin_experiment",
+        "type": "workspace_handoff",
+        "label": "跨目录接力",
+        "reason": "工作从 G:/temp/codex-thread-focus-cards 转到 G:/temp/codex-thread-map-plugin。",
+        "confidence": 0.96
+      },
+      {
+        "from_thread_id": "thr_plugin_experiment",
+        "to_thread_id": "thr_repo_validation",
+        "type": "verification_branch",
+        "label": "验证分支",
+        "reason": "侧边栏实验完成后，要到 app server 仓库验证真实接口返回。",
+        "confidence": 0.91
+      },
+      {
+        "from_thread_id": "thr_repo_validation",
+        "to_thread_id": "thr_plugin_experiment",
+        "type": "blocked_by",
+        "label": "受阻于",
+        "reason": "验证线程还要等插件线程先把渲染入口接好。",
+        "confidence": 0.89
+      }
+    ],
+    "frontier": {
+      "active_thread_ids": [
+        "thr_graph_domain",
+        "thr_plugin_experiment"
+      ],
+      "blocked_thread_ids": [
+        "thr_repo_validation"
+      ],
+      "parked_thread_ids": [
+        "thr_skill_source"
+      ],
+      "next_suggested_thread_id": "thr_graph_domain"
+    }
+  }
+}

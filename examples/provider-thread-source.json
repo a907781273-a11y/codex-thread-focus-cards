@@ -1,0 +1,151 @@
+{
+  "threads": [
+    {
+      "thread_id": "thr_skill_source",
+      "workspace_path": "C:/Users/90778/.codex/skills",
+      "context_refs": [
+        {
+          "kind": "skill",
+          "label": "$pua",
+          "path": "C:/Users/90778/.codex/skills/pua/SKILL.md"
+        }
+      ],
+      "source_apis": [
+        "thread/read"
+      ],
+      "items": [
+        {
+          "type": "userMessage",
+          "text": "你看一下 pua skill 怎么整合，状态描述要用中文。"
+        },
+        {
+          "type": "agentMessage",
+          "phase": "commentary",
+          "text": "我先看 C:/Users/90778/.codex/skills/pua/SKILL.md，再决定怎么接到线程卡里。"
+        },
+        {
+          "type": "plan",
+          "text": "先补技能来源识别，再把 skill_source 关系挂到工作流图。"
+        },
+        {
+          "type": "fileChange",
+          "file": "src/domain/skill-card-extractor.ts",
+          "symbols": [
+            "SkillCardExtractor.resolveSkillSource"
+          ]
+        }
+      ]
+    },
+    {
+      "thread_id": "thr_graph_domain",
+      "workspace_path": "G:/temp/codex-thread-focus-cards",
+      "context_refs": [
+        {
+          "kind": "workspace",
+          "label": "thread graph prototype",
+          "path": "G:/temp/codex-thread-focus-cards"
+        }
+      ],
+      "source_apis": [
+        "thread/list",
+        "thread/read"
+      ],
+      "items": [
+        {
+          "type": "userMessage",
+          "text": "我的意思是线程之间的联系，一个线程可能是上一步，另一个线程是下一步。"
+        },
+        {
+          "type": "agentMessage",
+          "phase": "commentary",
+          "text": "要把 buildThreadWorkstreamGraph 这一层补出来，不然只知道单线程在干嘛，不知道线程怎么接。"
+        },
+        {
+          "type": "plan",
+          "text": "先补主线、实验、验证、技能来源、跨目录接力和 blocked_by 的规则。"
+        },
+        {
+          "type": "fileChange",
+          "file": "src/domain/thread-workstream-graph.ts",
+          "symbols": [
+            "buildThreadWorkstreamGraph",
+            "selectWorkstreamFrontier"
+          ]
+        }
+      ]
+    },
+    {
+      "thread_id": "thr_plugin_experiment",
+      "workspace_path": "G:/temp/codex-thread-map-plugin",
+      "context_refs": [
+        {
+          "kind": "repo",
+          "label": "plugin repo",
+          "path": "G:/temp/codex-thread-map-plugin"
+        }
+      ],
+      "source_apis": [
+        "thread/read"
+      ],
+      "items": [
+        {
+          "type": "userMessage",
+          "text": "我准备在另一个文件夹里的线程里面去实验。"
+        },
+        {
+          "type": "agentMessage",
+          "phase": "commentary",
+          "text": "下一步切到 CodexSidebarThreadMap.renderGraph 这个插件线程，在另一个目录里把工作流图接到侧边栏。"
+        },
+        {
+          "type": "plan",
+          "text": "先接静态 graph，再验证 active 和 blocked 两组线程能不能显示。"
+        },
+        {
+          "type": "fileChange",
+          "file": "plugin/sidebar/codex-sidebar-thread-map.ts",
+          "symbols": [
+            "CodexSidebarThreadMap.renderGraph"
+          ]
+        }
+      ]
+    },
+    {
+      "thread_id": "thr_repo_validation",
+      "workspace_path": "G:/work/app-server",
+      "context_refs": [
+        {
+          "kind": "repo",
+          "label": "app server repo",
+          "path": "G:/work/app-server"
+        }
+      ],
+      "source_apis": [
+        "thread/list",
+        "thread/read"
+      ],
+      "items": [
+        {
+          "type": "userMessage",
+          "text": "还有更多的可能性，可能要在另一个业务仓库验证。"
+        },
+        {
+          "type": "agentMessage",
+          "phase": "commentary",
+          "text": "GET /api/thread-workstreams 这条验证线程先别切，它现在要等插件线程先把渲染入口接好。"
+        },
+        {
+          "type": "plan",
+          "text": "等 CodexSidebarThreadMap.renderGraph 接完后，再回来跑接口验证。"
+        },
+        {
+          "type": "fileChange",
+          "file": "server/routes/thread-workstreams.ts",
+          "symbols": [
+            "GET /api/thread-workstreams"
+          ]
+        }
+      ]
+    }
+  ]
+}

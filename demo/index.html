@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>线程工作流图 Demo</title>
+    <link rel="stylesheet" href="/demo/styles.css" />
+  </head>
+  <body>
+    <div class="background-orb orb-left"></div>
+    <div class="background-orb orb-right"></div>
+    <main class="app-shell">
+      <section class="hero" id="hero"></section>
+      <section class="provider-panel" id="providerPanel"></section>
+      <section class="board">
+        <div class="lane-panel">
+          <div class="panel-head">
+            <span class="eyebrow">线程前沿</span>
+            <h2>先切哪条，一眼看清</h2>
+          </div>
+          <div class="lanes" id="lanes"></div>
+        </div>
+        <div class="detail-panel" id="detailPanel"></div>
+      </section>
+      <section class="map-panel">
+        <div class="panel-head">
+          <span class="eyebrow">关系图</span>
+          <h2>这条线程为什么存在</h2>
+        </div>
+        <div class="relation-grid" id="relationGrid"></div>
+      </section>
+    </main>
+    <script type="module" src="/demo/app.js"></script>
+  </body>
+</html>
